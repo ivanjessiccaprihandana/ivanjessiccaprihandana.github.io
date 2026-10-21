@@ -191,6 +191,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-scroll-frame::-webkit-scrollbar { display: none; }
 .project-scroll-frame:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
 .project-scroll-frame img { position: static; width: 100%; height: auto; aspect-ratio: auto; object-fit: initial; border: 0; border-radius: 0; box-shadow: none; transition: none; }
+.project-scroll-sequence img + img { border-top: 8px solid var(--paper-light); }
 .project-card:hover .project-scroll-frame { transform: translateY(-5px); box-shadow: 0 28px 55px rgba(16,35,45,0.14); }
 .project-card:hover .project-scroll-frame img { transform: none; box-shadow: none; }
 .project-scroll-hint { position: absolute; z-index: 3; right: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px; color: var(--paper-light); background: rgba(16,35,45,0.88); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; box-shadow: 0 7px 20px rgba(16,35,45,0.2); backdrop-filter: blur(10px); font: 700 0.64rem/1 ui-monospace, Consolas, monospace; letter-spacing: 0.06em; text-transform: uppercase; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }

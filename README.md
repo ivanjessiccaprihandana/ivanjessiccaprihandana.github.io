@@ -42,6 +42,7 @@ Semua aset menggunakan relative path sehingga tetap bekerja ketika diterbitkan m
 
 Deskripsi proyek dibuat konservatif dari informasi yang diberikan dan sumber publik. Repository berikut sudah diverifikasi tersedia:
 
+- TraceBack: <https://github.com/ivanjessiccaprihandana/TraceBack>
 - CELL English Course & Bimbel: <https://github.com/ivanjessiccaprihandana/cell-smart-registration>
 - Presensi SDN 19 Kepahiang: <https://github.com/ivanjessiccaprihandana/absensi-sdn-19-kepahiang>
 
@@ -62,6 +63,8 @@ Ganti file `assets/Ivan-Dhany-Resume.pdf` dengan versi PDF terbaru menggunakan n
 
 Website sudah memakai screenshot yang diambil langsung dari aplikasi yang dijalankan dari repository publik. Jika ingin menggantinya dengan screenshot terbaru, simpan gambar baru lalu ubah `src` pada masing-masing gambar di `index.html`:
 
+- `assets/traceback-login.png`
+- `assets/traceback-dashboard.png`
 - `assets/project-cell.png`
 - `assets/project-organisync.png`
 - `assets/project-attendance.png`
