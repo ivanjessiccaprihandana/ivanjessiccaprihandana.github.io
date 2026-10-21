@@ -1,0 +1,9 @@
+# Local QA captures and editor backups
+backups/
+
+# Local debug output
+debug.log
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
