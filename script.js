@@ -39,12 +39,24 @@
     });
   }
 
+  let headerUpdateFrame = 0;
+  let headerIsScrolled = false;
+
   const updateHeader = () => {
-    if (header) header.classList.toggle('scrolled', window.scrollY > 16);
+    headerUpdateFrame = 0;
+    const isScrolled = window.scrollY > 16;
+    if (!header || isScrolled === headerIsScrolled) return;
+    headerIsScrolled = isScrolled;
+    header.classList.toggle('scrolled', isScrolled);
+  };
+
+  const scheduleHeaderUpdate = () => {
+    if (headerUpdateFrame) return;
+    headerUpdateFrame = window.requestAnimationFrame(updateHeader);
   };
 
   updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('scroll', scheduleHeaderUpdate, { passive: true });
 
   const profilePhotoFrame = document.querySelector('[data-profile-tilt]');
 
@@ -71,6 +83,17 @@
   }
 
   const technologyStage = document.querySelector('[data-tech-stage]');
+
+  if (technologyStage && !reduceMotion) {
+    if ('IntersectionObserver' in window) {
+      const technologyAnimationObserver = new IntersectionObserver(([entry]) => {
+        technologyStage.classList.toggle('is-active', entry.isIntersecting);
+      }, { rootMargin: '120px 0px' });
+      technologyAnimationObserver.observe(technologyStage);
+    } else {
+      technologyStage.classList.add('is-active');
+    }
+  }
 
   if (technologyStage && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
     const technologyItems = Array.from(technologyStage.querySelectorAll('[data-tech-depth]'));
@@ -131,14 +154,21 @@
 
   document.querySelectorAll('[data-project-scroll]').forEach((preview) => {
     const visual = preview.closest('.project-visual-scroll');
+    let progressFrame = 0;
 
     const updateProgress = () => {
+      progressFrame = 0;
       const scrollable = preview.scrollHeight - preview.clientHeight;
       const progress = scrollable > 0 ? preview.scrollTop / scrollable : 0;
       visual?.style.setProperty('--project-scroll-progress', String(progress));
     };
 
-    preview.addEventListener('scroll', updateProgress, { passive: true });
+    const scheduleProgressUpdate = () => {
+      if (progressFrame) return;
+      progressFrame = window.requestAnimationFrame(updateProgress);
+    };
+
+    preview.addEventListener('scroll', scheduleProgressUpdate, { passive: true });
     preview.addEventListener('keydown', (event) => {
       if (event.key === 'Home') preview.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
       if (event.key === 'End') preview.scrollTo({ top: preview.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' });
